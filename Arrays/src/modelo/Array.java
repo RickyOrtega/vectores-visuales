@@ -13,6 +13,11 @@ public class Array {
         this.c = 0;
         this.A = new int[tamagno];
     }
+    
+    //Me vi en la necesidad de crear un constructor vacío.
+    public Array(){
+        
+    }
 
     public int getTamagno() {
         return tamagno;
