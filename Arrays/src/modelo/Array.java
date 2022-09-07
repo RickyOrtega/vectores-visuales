@@ -5,7 +5,6 @@ import javax.swing.*;
 public class Array {
 
     private int A[];
-
     private int tamagno;
     private int c;
 
@@ -119,7 +118,8 @@ public class Array {
         }
         return 1;
     }
-
+    
+    //Búsqueda Secuencial
     public int busquedaSecuencial(int dato) {
         int pos = -1;
 
@@ -137,44 +137,7 @@ public class Array {
         return pos;
     }
 
-    public int busquedaBinaria() {
-        int dato;
-        int inferior;
-        int superior;
-        int mitad;
-        int i;
-        boolean flag = false;
-
-        dato = Integer.parseInt(JOptionPane.showInputDialog("Digite el número a buscar: "));
-
-        inferior = 0;
-        superior = 5;//la cantidad de elementos
-        i = 0;
-
-        mitad = (inferior + superior) / 2;
-
-        while (inferior <= superior && i < 5) {
-            if (A[mitad] == dato) {
-                flag = true;
-                break;
-            }
-            if (A[mitad] > dato) {
-                superior = mitad;
-                mitad = (inferior + superior) / 2;
-            }
-            if (A[mitad] < dato) {
-                inferior = mitad;
-                mitad = (inferior + superior) / 2;
-            }
-            i++;
-        }
-        if (flag == true) {
-            return mitad;
-        } else {
-            return -1;
-        }
-    }
-
+    //Búsqueda Binaria
     public int busquedaBinaria(int dato) {
         int inferior;
         int superior;
@@ -213,7 +176,7 @@ public class Array {
     //Muestra el vector
     public void recorrer() {
         if (c == 0) {
-            
+
         } else {
             for (int k = 0; k < this.c; k++) {
                 System.out.print(this.A[k] + " ");
