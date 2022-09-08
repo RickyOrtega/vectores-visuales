@@ -14,7 +14,6 @@ public class Programa extends javax.swing.JFrame {
     private int temaActual = 0;
 
     public Programa() {
-        establecerDarkLaf();
         initComponents();
     }
 
@@ -185,7 +184,7 @@ public class Programa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ordenarSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordenarSortActionPerformed
-        
+
     }//GEN-LAST:event_ordenarSortActionPerformed
 
     private void insertarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarInicioActionPerformed
@@ -208,7 +207,7 @@ public class Programa extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarInicioActionPerformed
 
     private void eliminarFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarFinalActionPerformed
-        
+
     }//GEN-LAST:event_eliminarFinalActionPerformed
 
     private void eliminarReferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarReferenciaActionPerformed
@@ -221,7 +220,7 @@ public class Programa extends javax.swing.JFrame {
         presentacion.setVisible(true);
     }//GEN-LAST:event_otherAboutActionPerformed
 
-    private void establecerDarkLaf() {
+    private static void establecerDarkLaf() {
         //Establecer FlatDarkLaf
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
@@ -230,7 +229,7 @@ public class Programa extends javax.swing.JFrame {
         }
     }
 
-    private void establecerLightLaf() {
+    private static void establecerLightLaf() {
         //Establecer FlatDarkLaf
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -243,6 +242,9 @@ public class Programa extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
+        establecerDarkLaf();
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
