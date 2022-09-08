@@ -22,9 +22,9 @@ public class Programa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        panelTrasero = new javax.swing.JPanel();
+        barrasScroll = new javax.swing.JScrollPane();
+        areaTexto = new javax.swing.JTextArea();
         barraMenu = new javax.swing.JMenuBar();
         menuInsertar = new javax.swing.JMenu();
         insertarInicio = new javax.swing.JMenuItem();
@@ -48,24 +48,24 @@ public class Programa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        areaTexto.setColumns(20);
+        areaTexto.setRows(5);
+        barrasScroll.setViewportView(areaTexto);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelTraseroLayout = new javax.swing.GroupLayout(panelTrasero);
+        panelTrasero.setLayout(panelTraseroLayout);
+        panelTraseroLayout.setHorizontalGroup(
+            panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTraseroLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barrasScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(50, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelTraseroLayout.setVerticalGroup(
+            panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTraseroLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barrasScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
@@ -174,11 +174,11 @@ public class Programa extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelTrasero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelTrasero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -252,7 +252,9 @@ public class Programa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaTexto;
     private javax.swing.JMenuBar barraMenu;
+    private javax.swing.JScrollPane barrasScroll;
     private javax.swing.JMenuItem buscarBinaria;
     private javax.swing.JMenuItem buscarSecuencial;
     private javax.swing.JMenuItem eliminarFinal;
@@ -261,9 +263,6 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JMenuItem insertarFinal;
     private javax.swing.JMenuItem insertarInicio;
     private javax.swing.JMenuItem insertarReferencia;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenu menuBuscar;
     private javax.swing.JMenu menuEliminar;
     private javax.swing.JMenu menuInsertar;
@@ -274,5 +273,6 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JMenuItem ordenarSeleccion;
     private javax.swing.JMenuItem ordenarSort;
     private javax.swing.JMenuItem otherAbout;
+    private javax.swing.JPanel panelTrasero;
     // End of variables declaration//GEN-END:variables
 }
