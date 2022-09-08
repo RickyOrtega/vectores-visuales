@@ -1,5 +1,9 @@
 package vistas;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.UIManager;
+import vistas.Other.Presentacion;
 import vistas.Eliminar.EliminarReferencia;
 import vistas.insertar.InsertarFinal;
 import vistas.insertar.InsertarInicio;
@@ -7,7 +11,10 @@ import vistas.insertar.InsertarReferencia;
 
 public class Programa extends javax.swing.JFrame {
 
+    private int temaActual = 0;
+
     public Programa() {
+        establecerDarkLaf();
         initComponents();
     }
 
@@ -15,6 +22,9 @@ public class Programa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         barraMenu = new javax.swing.JMenuBar();
         menuInsertar = new javax.swing.JMenu();
         insertarInicio = new javax.swing.JMenuItem();
@@ -33,9 +43,31 @@ public class Programa extends javax.swing.JFrame {
         ordenarSeleccion = new javax.swing.JMenuItem();
         ordenarSort = new javax.swing.JMenuItem();
         menuOther = new javax.swing.JMenu();
+        otherAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
 
         menuInsertar.setText("Insertar");
 
@@ -125,6 +157,15 @@ public class Programa extends javax.swing.JFrame {
         barraMenu.add(menuOrdenar);
 
         menuOther.setText("Other");
+
+        otherAbout.setText("About");
+        otherAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                otherAboutActionPerformed(evt);
+            }
+        });
+        menuOther.add(otherAbout);
+
         barraMenu.add(menuOther);
 
         setJMenuBar(barraMenu);
@@ -133,18 +174,18 @@ public class Programa extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void ordenarSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordenarSortActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_ordenarSortActionPerformed
 
     private void insertarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarInicioActionPerformed
@@ -163,17 +204,40 @@ public class Programa extends javax.swing.JFrame {
     }//GEN-LAST:event_insertarReferenciaActionPerformed
 
     private void eliminarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarInicioActionPerformed
-        
+
     }//GEN-LAST:event_eliminarInicioActionPerformed
 
     private void eliminarFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarFinalActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_eliminarFinalActionPerformed
 
     private void eliminarReferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarReferenciaActionPerformed
         EliminarReferencia eliminarReferencia = new EliminarReferencia();
         eliminarReferencia.setVisible(true);
     }//GEN-LAST:event_eliminarReferenciaActionPerformed
+
+    private void otherAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_otherAboutActionPerformed
+        Presentacion presentacion = new Presentacion();
+        presentacion.setVisible(true);
+    }//GEN-LAST:event_otherAboutActionPerformed
+
+    private void establecerDarkLaf() {
+        //Establecer FlatDarkLaf
+        try {
+            UIManager.setLookAndFeel(new FlatDarkLaf());
+        } catch (Exception ex) {
+            System.err.println("Error, " + ex);
+        }
+    }
+
+    private void establecerLightLaf() {
+        //Establecer FlatDarkLaf
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception ex) {
+            System.err.println("Error, " + ex);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -197,6 +261,9 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JMenuItem insertarFinal;
     private javax.swing.JMenuItem insertarInicio;
     private javax.swing.JMenuItem insertarReferencia;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenu menuBuscar;
     private javax.swing.JMenu menuEliminar;
     private javax.swing.JMenu menuInsertar;
@@ -206,5 +273,6 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JMenuItem ordenarInsercion;
     private javax.swing.JMenuItem ordenarSeleccion;
     private javax.swing.JMenuItem ordenarSort;
+    private javax.swing.JMenuItem otherAbout;
     // End of variables declaration//GEN-END:variables
 }

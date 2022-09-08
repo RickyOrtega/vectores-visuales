@@ -1,11 +1,11 @@
-package vistas;
+package vistas.Other;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.UIManager;
 
-public class Presentación extends javax.swing.JFrame {
+public class Presentacion extends javax.swing.JFrame {
 
-    public Presentación() {
+    public Presentacion() {
         initComponents();
     }
     @SuppressWarnings("unchecked")
@@ -54,7 +54,7 @@ public class Presentación extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Presentación().setVisible(true);
+                new Presentacion().setVisible(true);
             }
         });
     }
