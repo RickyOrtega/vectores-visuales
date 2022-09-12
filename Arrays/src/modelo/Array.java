@@ -150,12 +150,12 @@ public class Array {
         boolean flag = false;
 
         inferior = 0;
-        superior = 5;//la cantidad de elementos
+        superior = this.c;//la cantidad de elementos
         i = 0;
 
         mitad = (inferior + superior) / 2;
 
-        while (inferior <= superior && i < 5) {
+        while (inferior <= superior && i < c) {
             if (A[mitad] == dato) {
                 flag = true;
                 break;

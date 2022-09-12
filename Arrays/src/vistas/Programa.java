@@ -24,10 +24,10 @@ public class Programa extends javax.swing.JFrame {
     }
 
     private void resetearPanel() {
-        
+
         this.areaTexto.setColumns(this.tamagnoVector);
         this.areaTexto.setRows(3);
-        
+
         this.salidaPosicionesOcupadas.setText(String.valueOf(c));
         this.salidaTamagnoVector.setText(String.valueOf(this.tamagnoVector));
 
@@ -36,26 +36,19 @@ public class Programa extends javax.swing.JFrame {
 
         String texto = "";
         String txtPosiciones = "";
-        
-        for (int i = 0; i < vector.length; i++) {
-            areaTexto.insert(String.valueOf(vector[i]), 10);
-        }
-        
 
-//        for (int i = 0; i < vector.length; i++) {
-//            texto += String.valueOf(vector[i]) + "      ";
-//            txtPosiciones += i + "      ";
-//            if (i >= 10) {
-//                if (i % 2 == 0) {
-//                    texto += "    ";
-//                } else {
-//                    texto += "  ";
-//                }
-//            }
-//        }
-//        for (int i = 0; i < this.tamagnoVector; i++) {
-//            txtPosiciones += i + "   ";
-//        }
+        for (int i = 0; i < vector.length; i++) {
+            texto += String.valueOf(vector[i]) + "      ";
+            txtPosiciones += i + "      ";
+            if (i >= 10) {
+                if (i % 2 == 0) {
+                    texto += "    ";
+                    txtPosiciones += " ";
+                } else {
+                    texto += "  ";
+                }
+            }
+        }
 
         this.areaTexto.setFont(new Font("Roboto", Font.BOLD, 20));
         this.areaTexto.setText(texto);
@@ -80,7 +73,7 @@ public class Programa extends javax.swing.JFrame {
         menuInsertar = new javax.swing.JMenu();
         insertarInicio = new javax.swing.JMenuItem();
         insertarFinal = new javax.swing.JMenuItem();
-        insertarPosicion = new javax.swing.JMenuItem();
+        insertarIndice = new javax.swing.JMenuItem();
         menuEliminar = new javax.swing.JMenu();
         eliminarInicio = new javax.swing.JMenuItem();
         eliminarFinal = new javax.swing.JMenuItem();
@@ -177,16 +170,31 @@ public class Programa extends javax.swing.JFrame {
         menuInsertar.add(insertarInicio);
 
         insertarFinal.setText("Final");
+        insertarFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insertarFinalActionPerformed(evt);
+            }
+        });
         menuInsertar.add(insertarFinal);
 
-        insertarPosicion.setText("Posición");
-        menuInsertar.add(insertarPosicion);
+        insertarIndice.setText("Índice");
+        insertarIndice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insertarIndiceActionPerformed(evt);
+            }
+        });
+        menuInsertar.add(insertarIndice);
 
         barraMenu.add(menuInsertar);
 
         menuEliminar.setText("Eliminar");
 
         eliminarInicio.setText("Inicio");
+        eliminarInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarInicioActionPerformed(evt);
+            }
+        });
         menuEliminar.add(eliminarInicio);
 
         eliminarFinal.setText("Final");
@@ -200,6 +208,11 @@ public class Programa extends javax.swing.JFrame {
         menuBuscar.setText("Buscar");
 
         buscarSecuencial.setText("Secuencial");
+        buscarSecuencial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarSecuencialActionPerformed(evt);
+            }
+        });
         menuBuscar.add(buscarSecuencial);
 
         buscarBinaria.setText("Binaria");
@@ -257,7 +270,27 @@ public class Programa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscarBinariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBinariaActionPerformed
-        // TODO add your handling code here:
+
+        int datoBuscar = 0;
+
+        if (this.c == 0) {
+            JOptionPane.showMessageDialog(null, "El vector está vacío.");
+        } else {
+            for (int i = 0; i < 1; i++) {
+                try {
+                    datoBuscar = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el número a buscar: "));
+                    i++;
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Ingrese un número entero.");
+                    i--;
+                }
+            }
+            if (array.busquedaBinaria(datoBuscar) == -1) {
+                JOptionPane.showMessageDialog(null, "No se encuentra el número " + datoBuscar + " en el vector.");
+            } else {
+                JOptionPane.showMessageDialog(null, "El número " + datoBuscar + " se encuentra en la posición " + array.busquedaBinaria(datoBuscar));
+            }
+        }
     }//GEN-LAST:event_buscarBinariaActionPerformed
 
     private void insertarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarInicioActionPerformed
@@ -287,6 +320,84 @@ public class Programa extends javax.swing.JFrame {
 
     }//GEN-LAST:event_otherAboutActionPerformed
 
+    private void insertarFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarFinalActionPerformed
+        int numeroInsertar = 0;
+
+        for (int i = 0; i < 1; i++) {
+            try {
+                numeroInsertar = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el número a insertar: "));
+                i++;
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Ingrese un número entero");
+                i--;
+            }
+        }
+        if (array.insercionFinal(numeroInsertar) == 0) {
+            JOptionPane.showMessageDialog(null, "Desbordamiento de memoria. Vector lleno.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Inserción finalizada.");
+            this.c = array.getC();
+            this.resetearPanel();
+        }
+    }//GEN-LAST:event_insertarFinalActionPerformed
+
+    private void insertarIndiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarIndiceActionPerformed
+        int numeroInsertar = -1;
+        int posicionInsertar = -1;
+
+        for (int i = 0; i < 1; i++) {
+            try {
+                numeroInsertar = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el número a insertar: "));
+                i++;
+                try {
+                    do {
+                        posicionInsertar = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el índice: "));
+                    } while (posicionInsertar < 0 || posicionInsertar > this.tamagnoVector);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Ingrese un número entero");
+                    i--;
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Ingrese un número entero");
+                i--;
+            }
+        }
+        if (array.insercionReferencia(numeroInsertar, posicionInsertar) == 0) {
+            JOptionPane.showMessageDialog(null, "Desbordamiento de memoria. Vector lleno.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Inserción finalizada.");
+            this.c = array.getC();
+            this.resetearPanel();
+        }
+    }//GEN-LAST:event_insertarIndiceActionPerformed
+
+    private void eliminarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarInicioActionPerformed
+
+    private void buscarSecuencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarSecuencialActionPerformed
+        int datoBuscar = 0;
+
+        if (this.c == 0) {
+            JOptionPane.showMessageDialog(null, "El vector está vacío.");
+        } else {
+            for (int i = 0; i < 1; i++) {
+                try {
+                    datoBuscar = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el número a buscar: "));
+                    i++;
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Ingrese un número entero.");
+                    i--;
+                }
+            }
+            if (array.busquedaSecuencial(datoBuscar) == -1) {
+                JOptionPane.showMessageDialog(null, "No se encuentra el número " + datoBuscar + " en el vector.");
+            } else {
+                JOptionPane.showMessageDialog(null, "El número " + datoBuscar + " se encuentra en la posición " + array.busquedaSecuencial(datoBuscar));
+            }
+        }
+    }//GEN-LAST:event_buscarSecuencialActionPerformed
+
     private static void establecerDarkLaf() {
         //Establecer FlatDarkLaf
         try {
@@ -315,8 +426,8 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JMenuItem eliminarInicio;
     private javax.swing.JMenuItem eliminarPosicion;
     private javax.swing.JMenuItem insertarFinal;
+    private javax.swing.JMenuItem insertarIndice;
     private javax.swing.JMenuItem insertarInicio;
-    private javax.swing.JMenuItem insertarPosicion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -87,7 +87,6 @@ public class TamagnoVector extends javax.swing.JFrame {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Ingrese un número entero.");
         }
-
     }//GEN-LAST:event_botonEnviarMouseClicked
 
     public static void main(String args[]) {
