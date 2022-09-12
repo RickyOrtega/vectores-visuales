@@ -104,7 +104,7 @@ public class Array {
         return 1;
     }
 
-    public int eliminarReferencia(int pos) {
+    public int eliminarPosicion(int pos) {
         if (c == 0) {
             return 0;
         } else {

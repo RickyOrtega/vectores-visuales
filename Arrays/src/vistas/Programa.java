@@ -37,7 +37,7 @@ public class Programa extends javax.swing.JFrame {
         String texto = "";
         String txtPosiciones = "";
 
-        for (int i = 0; i < vector.length; i++) {
+        for (int i = 0; i < c; i++) {
             texto += String.valueOf(vector[i]) + "      ";
             txtPosiciones += i + "      ";
             if (i >= 10) {
@@ -198,9 +198,19 @@ public class Programa extends javax.swing.JFrame {
         menuEliminar.add(eliminarInicio);
 
         eliminarFinal.setText("Final");
+        eliminarFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarFinalActionPerformed(evt);
+            }
+        });
         menuEliminar.add(eliminarFinal);
 
         eliminarPosicion.setText("Posición");
+        eliminarPosicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarPosicionActionPerformed(evt);
+            }
+        });
         menuEliminar.add(eliminarPosicion);
 
         barraMenu.add(menuEliminar);
@@ -372,12 +382,17 @@ public class Programa extends javax.swing.JFrame {
     }//GEN-LAST:event_insertarIndiceActionPerformed
 
     private void eliminarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarInicioActionPerformed
-        // TODO add your handling code here:
+        if (this.array.eliminarInicio() == 0) {
+            JOptionPane.showMessageDialog(null, "El vector está vacío.");
+        } else {
+
+            c--;
+            resetearPanel();
+        }
     }//GEN-LAST:event_eliminarInicioActionPerformed
 
     private void buscarSecuencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarSecuencialActionPerformed
         int datoBuscar = 0;
-
         if (this.c == 0) {
             JOptionPane.showMessageDialog(null, "El vector está vacío.");
         } else {
@@ -397,6 +412,41 @@ public class Programa extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_buscarSecuencialActionPerformed
+
+    private void eliminarFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarFinalActionPerformed
+        if (this.array.eliminarFinal() == 0) {
+            JOptionPane.showMessageDialog(null, "El vector está vacío.");
+        } else {
+
+            c--;
+            resetearPanel();
+        }
+    }//GEN-LAST:event_eliminarFinalActionPerformed
+
+    private void eliminarPosicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPosicionActionPerformed
+        int posicionEliminar = -1;
+        if (this.c == 0) {
+            JOptionPane.showMessageDialog(null, "El vector está vacío.");
+        } else {
+            for (int i = 0; i < 1; i++) {
+                try {
+                    posicionEliminar = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la posición a eliminar: "));
+                    i++;
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Ingrese un número entero.");
+                    i--;
+                }
+            }
+
+            if (this.array.eliminarPosicion(posicionEliminar) == 0) {
+                JOptionPane.showMessageDialog(null, "El vector está vacío.");
+            } else {
+                c--;
+                array.eliminarPosicion(posicionEliminar);
+                resetearPanel();
+            }
+        }
+    }//GEN-LAST:event_eliminarPosicionActionPerformed
 
     private static void establecerDarkLaf() {
         //Establecer FlatDarkLaf
