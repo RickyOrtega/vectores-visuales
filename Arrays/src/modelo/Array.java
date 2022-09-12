@@ -13,6 +13,10 @@ public class Array {
         this.c = 0;
         this.A = new int[tamagno];
     }
+    
+    public int[] getVector(){
+        return this.A;
+    }
 
     public int getTamagno() {
         return tamagno;

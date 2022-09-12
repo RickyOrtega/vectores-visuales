@@ -2,19 +2,38 @@ package vistas;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import modelo.Array;
 import vistas.Other.Presentacion;
-import vistas.Eliminar.EliminarReferencia;
-import vistas.insertar.InsertarFinal;
-import vistas.insertar.InsertarInicio;
-import vistas.insertar.InsertarReferencia;
 
 public class Programa extends javax.swing.JFrame {
 
-    private int temaActual = 0;
+    private int tamagnoVector;
+    private Array array;
+    private int vector[];
+    private int c = 0;
 
-    public Programa() {
+    public Programa(int tamagnoVector) {
+        establecerDarkLaf();
+        this.tamagnoVector = tamagnoVector;
+        array = new Array(this.tamagnoVector);
+
         initComponents();
+        resetearPanel();
+    }
+
+    private void resetearPanel() {
+        this.salidaPosicionesOcupadas.setText(String.valueOf(c));
+        this.salidaTamagnoVector.setText(String.valueOf(this.tamagnoVector));
+        
+        this.areaTexto.setText("");
+        this.vector = array.getVector();
+        
+        String texto = "";
+        for(int i=0; i<array.getC();i++){
+            
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -24,6 +43,10 @@ public class Programa extends javax.swing.JFrame {
         panelTrasero = new javax.swing.JPanel();
         barrasScroll = new javax.swing.JScrollPane();
         areaTexto = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        salidaTamagnoVector = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        salidaPosicionesOcupadas = new javax.swing.JTextField();
         barraMenu = new javax.swing.JMenuBar();
         menuInsertar = new javax.swing.JMenu();
         insertarInicio = new javax.swing.JMenuItem();
@@ -47,30 +70,62 @@ public class Programa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        areaTexto.setEditable(false);
         areaTexto.setColumns(20);
         areaTexto.setRows(5);
         barrasScroll.setViewportView(areaTexto);
+
+        jLabel1.setText("Tamaño del vector:");
+
+        salidaTamagnoVector.setEditable(false);
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("C:");
+
+        salidaPosicionesOcupadas.setEditable(false);
 
         javax.swing.GroupLayout panelTraseroLayout = new javax.swing.GroupLayout(panelTrasero);
         panelTrasero.setLayout(panelTraseroLayout);
         panelTraseroLayout.setHorizontalGroup(
             panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTraseroLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(barrasScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(barrasScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 907, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelTraseroLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(salidaTamagnoVector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(102, 102, 102)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(salidaPosicionesOcupadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         panelTraseroLayout.setVerticalGroup(
             panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTraseroLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTraseroLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(salidaPosicionesOcupadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(salidaTamagnoVector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(barrasScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         menuInsertar.setText("Insertar");
 
         insertarInicio.setText("Inicio");
+        insertarInicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                insertarInicioMouseClicked(evt);
+            }
+        });
         insertarInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertarInicioActionPerformed(evt);
@@ -188,18 +243,33 @@ public class Programa extends javax.swing.JFrame {
     }//GEN-LAST:event_ordenarSortActionPerformed
 
     private void insertarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarInicioActionPerformed
-        InsertarInicio insertarInicio = new InsertarInicio();
-        insertarInicio.setVisible(true);
+
+        int numeroInsertar = 0;
+
+        for (int i = 0; i < 1; i++) {
+            try {
+                numeroInsertar = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el número a insertar: "));
+                i++;
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Ingrese un número entero");
+                i--;
+            }
+        }
+        if (array.insercionInicio(numeroInsertar) == 0) {
+            JOptionPane.showMessageDialog(null, "Desbordamiento de memoria. Vector lleno.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Inserción finalizada.");
+            this.c = array.getC();
+            this.resetearPanel();
+        }
     }//GEN-LAST:event_insertarInicioActionPerformed
 
     private void insertarFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarFinalActionPerformed
-        InsertarFinal insertarFinal = new InsertarFinal();
-        insertarFinal.setVisible(true);
+
     }//GEN-LAST:event_insertarFinalActionPerformed
 
     private void insertarReferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarReferenciaActionPerformed
-        InsertarReferencia insertarReferencia = new InsertarReferencia();
-        insertarReferencia.setVisible(true);
+
     }//GEN-LAST:event_insertarReferenciaActionPerformed
 
     private void eliminarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarInicioActionPerformed
@@ -211,14 +281,17 @@ public class Programa extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarFinalActionPerformed
 
     private void eliminarReferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarReferenciaActionPerformed
-        EliminarReferencia eliminarReferencia = new EliminarReferencia();
-        eliminarReferencia.setVisible(true);
+
     }//GEN-LAST:event_eliminarReferenciaActionPerformed
 
     private void otherAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_otherAboutActionPerformed
         Presentacion presentacion = new Presentacion();
         presentacion.setVisible(true);
     }//GEN-LAST:event_otherAboutActionPerformed
+
+    private void insertarInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertarInicioMouseClicked
+
+    }//GEN-LAST:event_insertarInicioMouseClicked
 
     private static void establecerDarkLaf() {
         //Establecer FlatDarkLaf
@@ -238,21 +311,6 @@ public class Programa extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-
-        establecerDarkLaf();
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Programa().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaTexto;
     private javax.swing.JMenuBar barraMenu;
@@ -265,6 +323,8 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JMenuItem insertarFinal;
     private javax.swing.JMenuItem insertarInicio;
     private javax.swing.JMenuItem insertarReferencia;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu menuBuscar;
     private javax.swing.JMenu menuEliminar;
     private javax.swing.JMenu menuInsertar;
@@ -276,5 +336,7 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JMenuItem ordenarSort;
     private javax.swing.JMenuItem otherAbout;
     private javax.swing.JPanel panelTrasero;
+    private javax.swing.JTextField salidaPosicionesOcupadas;
+    private javax.swing.JTextField salidaTamagnoVector;
     // End of variables declaration//GEN-END:variables
 }
