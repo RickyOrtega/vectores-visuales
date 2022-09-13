@@ -98,21 +98,33 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Burbuja"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ordenarBurbujaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="ordenarInsercion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Insercion"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ordenarInsercionActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="ordenarSeleccion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Selecci&#xf3;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ordenarSeleccionActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="ordenarSort">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sort"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ordenarSortActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

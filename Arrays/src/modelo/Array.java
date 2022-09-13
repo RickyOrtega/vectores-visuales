@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.Arrays;
 import javax.swing.*;
 
 public class Array {
@@ -13,8 +14,8 @@ public class Array {
         this.c = 0;
         this.A = new int[tamagno];
     }
-    
-    public int[] getVector(){
+
+    public int[] getVector() {
         return this.A;
     }
 
@@ -122,7 +123,7 @@ public class Array {
         }
         return 1;
     }
-    
+
     //Búsqueda Secuencial
     public int busquedaSecuencial(int dato) {
         int pos = -1;
@@ -180,7 +181,6 @@ public class Array {
     //Muestra el vector
     public void recorrer() {
         if (c == 0) {
-
         } else {
             for (int k = 0; k < this.c; k++) {
                 System.out.print(this.A[k] + " ");
@@ -191,52 +191,75 @@ public class Array {
 
     //Ordenamientos, nadie los pidió pero quiero y puedo jajaja
     //Método Burbuja
-    public void ordenamientoBurbuja() {
-        int aux;
-        for (int i = 0; i < (c - 1); i++) {
-            for (int x = 0; x < (c - 1); x++) {
-                if (A[x] > A[x + 1]) {
-                    aux = A[x];
-                    A[x] = A[x + 1];
-                    A[x + 1] = aux;
+    public int ordenamientoBurbuja() {
+
+        if (c == 0) {
+            return 0;
+        } else {
+            int aux;
+            for (int i = 0; i < (c - 1); i++) {
+                for (int x = 0; x < (c - 1); x++) {
+                    if (A[x] > A[x + 1]) {
+                        aux = A[x];
+                        A[x] = A[x + 1];
+                        A[x + 1] = aux;
+                    }
                 }
             }
         }
-        JOptionPane.showMessageDialog(null, "Ordenamiento realizado");
+        return 1;
     }
 
     //Ordenamiento por inserción
-    public void ordenamientoInsercion() {
-        int posicion;
-        int aux;
-        for (int i = 0; i < c; i++) {
-            posicion = i;
-            aux = A[i];
+    public int ordenamientoInsercion() {
+        if (c == 0) {
+            return 0;
+        } else {
+            int posicion;
+            int aux;
+            for (int i = 0; i < c; i++) {
+                posicion = i;
+                aux = A[i];
 
-            while ((posicion > 0) && (A[posicion - 1] > aux)) {
-                A[posicion] = A[posicion - 1];
-                posicion--;
+                while ((posicion > 0) && (A[posicion - 1] > aux)) {
+                    A[posicion] = A[posicion - 1];
+                    posicion--;
+                }
+                A[posicion] = aux;
             }
-            A[posicion] = aux;
         }
-        JOptionPane.showMessageDialog(null, "Ordenamiento realizado");
+        return 1;
     }
 
     //Ordenamiento por Selección
-    public void ordenamientoSeleccion() {
-        int min;
-        int aux;
-        for (int i = 0; i < c; i++) {
-            min = i;
-            for (int x = i + 1; x < c; x++) {
-                if (A[x] < A[min]) {
-                    min = x;
+    public int ordenamientoSeleccion() {
+
+        if (c == 0) {
+            return 0;
+        } else {
+            int min;
+            int aux;
+            for (int i = 0; i < c; i++) {
+                min = i;
+                for (int x = i + 1; x < c; x++) {
+                    if (A[x] < A[min]) {
+                        min = x;
+                    }
                 }
+                aux = A[i];
+                A[i] = A[min];
+                A[min] = aux;
             }
-            aux = A[i];
-            A[i] = A[min];
-            A[min] = aux;
         }
-        JOptionPane.showMessageDialog(null, "Ordenamiento realizado");
+        return 1;
+    }
+    
+    public int ordenamientoSort(){
+        if(c==0){
+            return 0;
+        } else {
+            Arrays.sort(this.A, 0 , c);
+        }
+        return 1;
     }
 }

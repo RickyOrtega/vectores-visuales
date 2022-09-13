@@ -238,15 +238,35 @@ public class Programa extends javax.swing.JFrame {
         menuOrdenar.setText("Ordenar");
 
         ordenarBurbuja.setText("Burbuja");
+        ordenarBurbuja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ordenarBurbujaActionPerformed(evt);
+            }
+        });
         menuOrdenar.add(ordenarBurbuja);
 
         ordenarInsercion.setText("Insercion");
+        ordenarInsercion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ordenarInsercionActionPerformed(evt);
+            }
+        });
         menuOrdenar.add(ordenarInsercion);
 
         ordenarSeleccion.setText("Selección");
+        ordenarSeleccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ordenarSeleccionActionPerformed(evt);
+            }
+        });
         menuOrdenar.add(ordenarSeleccion);
 
         ordenarSort.setText("Sort");
+        ordenarSort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ordenarSortActionPerformed(evt);
+            }
+        });
         menuOrdenar.add(ordenarSort);
 
         barraMenu.add(menuOrdenar);
@@ -362,7 +382,7 @@ public class Programa extends javax.swing.JFrame {
                 try {
                     do {
                         posicionInsertar = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el índice: "));
-                    } while (posicionInsertar < 0 || posicionInsertar > this.tamagnoVector);
+                    } while (posicionInsertar < 0 || posicionInsertar >= this.c);
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Ingrese un número entero");
                     i--;
@@ -447,6 +467,42 @@ public class Programa extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_eliminarPosicionActionPerformed
+
+    private void ordenarBurbujaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordenarBurbujaActionPerformed
+        if (array.ordenamientoBurbuja() == 0) {
+            JOptionPane.showMessageDialog(null, "No fue posible hacer el ordenamiento.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ordenamiento realizado.");
+            resetearPanel();
+        }
+    }//GEN-LAST:event_ordenarBurbujaActionPerformed
+
+    private void ordenarInsercionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordenarInsercionActionPerformed
+        if (array.ordenamientoInsercion() == 0) {
+            JOptionPane.showMessageDialog(null, "No fue posible hacer el ordenamiento.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ordenamiento realizado.");
+            resetearPanel();
+        }
+    }//GEN-LAST:event_ordenarInsercionActionPerformed
+
+    private void ordenarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordenarSeleccionActionPerformed
+        if (array.ordenamientoSeleccion() == 0) {
+            JOptionPane.showMessageDialog(null, "No fue posible hacer el ordenamiento.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ordenamiento realizado.");
+            resetearPanel();
+        }
+    }//GEN-LAST:event_ordenarSeleccionActionPerformed
+
+    private void ordenarSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordenarSortActionPerformed
+        if (array.ordenamientoSort() == 0) {
+            JOptionPane.showMessageDialog(null, "No fue posible hacer el ordenamiento.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ordenamiento realizado.");
+            resetearPanel();
+        }
+    }//GEN-LAST:event_ordenarSortActionPerformed
 
     private static void establecerDarkLaf() {
         //Establecer FlatDarkLaf
