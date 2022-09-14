@@ -4,7 +4,12 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Font;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import modelo.Array;
 import vistas.Other.Presentacion;
 
@@ -14,46 +19,44 @@ public class Programa extends javax.swing.JFrame {
     private Array array;//Clase Array original
     private int vector[];//Guarda una copia del vector que devuelve el método Array.getVector;
     private int c = 0;
+    private String nombreColumnas[];
+    private String datos[][];
 
     public Programa(int tamagnoVector) {
         establecerDarkLaf();
         this.tamagnoVector = tamagnoVector;
+        this.nombreColumnas = new String[tamagnoVector];
+        this.datos = new String[1][tamagnoVector];
         array = new Array(this.tamagnoVector);
         initComponents();
         resetearPanel();
     }
 
     private void resetearPanel() {
+        this.vector = array.getVector();
 
-        this.areaTexto.setColumns(this.tamagnoVector);
-        this.areaTexto.setRows(3);
+        for (int i = 0; i < c; i++) {
+            nombreColumnas[i] = String.valueOf(i);
+        }
 
+        for (int i = 0; i < c; i++) {
+            datos[0][i] = String.valueOf(vector[i]);
+        }
+
+        DefaultTableModel modeloTabla = new DefaultTableModel(datos, nombreColumnas);
+
+        modeloTabla.setColumnCount(this.c);
+        modeloTabla.setRowCount(2);
+
+        this.tablaSalida.setModel(modeloTabla);
         this.salidaPosicionesOcupadas.setText(String.valueOf(c));
         this.salidaTamagnoVector.setText(String.valueOf(this.tamagnoVector));
 
-        this.areaTexto.setText("");
-        this.vector = array.getVector();
-
-        String texto = "";
-        String txtPosiciones = "";
-
         for (int i = 0; i < c; i++) {
-            texto += String.valueOf(vector[i]) + "      ";
-            txtPosiciones += i + "      ";
-            if (i >= 10) {
-                if (i % 2 == 0) {
-                    texto += "    ";
-                    txtPosiciones += " ";
-                } else {
-                    texto += "  ";
-                }
-            }
+            DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+            tcr.setHorizontalAlignment(SwingConstants.CENTER);
+            this.tablaSalida.getColumnModel().getColumn(i).setCellRenderer(tcr);
         }
-
-        this.areaTexto.setFont(new Font("Roboto", Font.BOLD, 20));
-        this.areaTexto.setText(texto);
-        this.areaTexto.append("\n\n");
-        this.areaTexto.append(txtPosiciones);
     }
 
     @SuppressWarnings("unchecked")
@@ -61,14 +64,12 @@ public class Programa extends javax.swing.JFrame {
     private void initComponents() {
 
         panelTrasero = new javax.swing.JPanel();
-        barrasScroll = new javax.swing.JScrollPane();
-        areaTexto = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         salidaTamagnoVector = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         salidaPosicionesOcupadas = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaSalida = new javax.swing.JTable();
         barraMenu = new javax.swing.JMenuBar();
         menuInsertar = new javax.swing.JMenu();
         insertarInicio = new javax.swing.JMenuItem();
@@ -92,13 +93,6 @@ public class Programa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        barrasScroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
-        areaTexto.setEditable(false);
-        areaTexto.setColumns(20);
-        areaTexto.setRows(5);
-        barrasScroll.setViewportView(areaTexto);
-
         jLabel1.setText("Tamaño del vector:");
 
         salidaTamagnoVector.setEditable(false);
@@ -108,34 +102,52 @@ public class Programa extends javax.swing.JFrame {
 
         salidaPosicionesOcupadas.setEditable(false);
 
-        jLabel3.setText("Valor:");
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        jLabel4.setText("Posición:");
+        tablaSalida.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaSalida.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setViewportView(tablaSalida);
 
         javax.swing.GroupLayout panelTraseroLayout = new javax.swing.GroupLayout(panelTrasero);
         panelTrasero.setLayout(panelTraseroLayout);
         panelTraseroLayout.setHorizontalGroup(
             panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTraseroLayout.createSequentialGroup()
-                .addGroup(panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelTraseroLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTraseroLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(barrasScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelTraseroLayout.createSequentialGroup()
                         .addComponent(salidaTamagnoVector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(102, 102, 102)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(salidaPosicionesOcupadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         panelTraseroLayout.setVerticalGroup(
             panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,15 +160,9 @@ public class Programa extends javax.swing.JFrame {
                     .addGroup(panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(salidaTamagnoVector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(panelTraseroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(barrasScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelTraseroLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel3)
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         menuInsertar.setText("Insertar");
@@ -523,9 +529,7 @@ public class Programa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea areaTexto;
     private javax.swing.JMenuBar barraMenu;
-    private javax.swing.JScrollPane barrasScroll;
     private javax.swing.JMenuItem buscarBinaria;
     private javax.swing.JMenuItem buscarSecuencial;
     private javax.swing.JMenuItem eliminarFinal;
@@ -536,8 +540,7 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JMenuItem insertarInicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu menuBuscar;
     private javax.swing.JMenu menuEliminar;
     private javax.swing.JMenu menuInsertar;
@@ -551,5 +554,6 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JPanel panelTrasero;
     private javax.swing.JTextField salidaPosicionesOcupadas;
     private javax.swing.JTextField salidaTamagnoVector;
+    private javax.swing.JTable tablaSalida;
     // End of variables declaration//GEN-END:variables
 }
