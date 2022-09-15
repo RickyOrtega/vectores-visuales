@@ -29,10 +29,10 @@ public class Programa extends javax.swing.JFrame {
         this.datos = new String[1][tamagnoVector];
         array = new Array(this.tamagnoVector);
         initComponents();
-        resetearPanel();
+        actualizarPanel();
     }
 
-    private void resetearPanel() {
+    private void actualizarPanel() {
         this.vector = array.getVector();
 
         for (int i = 0; i < c; i++) {
@@ -48,13 +48,15 @@ public class Programa extends javax.swing.JFrame {
         modeloTabla.setColumnCount(this.c);
         modeloTabla.setRowCount(2);
 
+        int anchos[] = {50, 150, 50, 70};
+
         this.tablaSalida.setModel(modeloTabla);
         this.salidaPosicionesOcupadas.setText(String.valueOf(c));
         this.salidaTamagnoVector.setText(String.valueOf(this.tamagnoVector));
 
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
         for (int i = 0; i < c; i++) {
-            DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
-            tcr.setHorizontalAlignment(SwingConstants.CENTER);
             this.tablaSalida.getColumnModel().getColumn(i).setCellRenderer(tcr);
         }
     }
@@ -346,7 +348,7 @@ public class Programa extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Inserción finalizada.");
             this.c = array.getC();
-            this.resetearPanel();
+            this.actualizarPanel();
         }
     }//GEN-LAST:event_insertarInicioActionPerformed
 
@@ -373,7 +375,7 @@ public class Programa extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Inserción finalizada.");
             this.c = array.getC();
-            this.resetearPanel();
+            this.actualizarPanel();
         }
     }//GEN-LAST:event_insertarFinalActionPerformed
 
@@ -403,7 +405,7 @@ public class Programa extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Inserción finalizada.");
             this.c = array.getC();
-            this.resetearPanel();
+            this.actualizarPanel();
         }
     }//GEN-LAST:event_insertarIndiceActionPerformed
 
@@ -413,7 +415,7 @@ public class Programa extends javax.swing.JFrame {
         } else {
 
             c--;
-            resetearPanel();
+            actualizarPanel();
         }
     }//GEN-LAST:event_eliminarInicioActionPerformed
 
@@ -443,9 +445,8 @@ public class Programa extends javax.swing.JFrame {
         if (this.array.eliminarFinal() == 0) {
             JOptionPane.showMessageDialog(null, "El vector está vacío.");
         } else {
-
             c--;
-            resetearPanel();
+            actualizarPanel();
         }
     }//GEN-LAST:event_eliminarFinalActionPerformed
 
@@ -469,7 +470,7 @@ public class Programa extends javax.swing.JFrame {
             } else {
                 c--;
                 array.eliminarPosicion(posicionEliminar);
-                resetearPanel();
+                actualizarPanel();
             }
         }
     }//GEN-LAST:event_eliminarPosicionActionPerformed
@@ -479,7 +480,7 @@ public class Programa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No fue posible hacer el ordenamiento.");
         } else {
             JOptionPane.showMessageDialog(null, "Ordenamiento realizado.");
-            resetearPanel();
+            actualizarPanel();
         }
     }//GEN-LAST:event_ordenarBurbujaActionPerformed
 
@@ -488,7 +489,7 @@ public class Programa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No fue posible hacer el ordenamiento.");
         } else {
             JOptionPane.showMessageDialog(null, "Ordenamiento realizado.");
-            resetearPanel();
+            actualizarPanel();
         }
     }//GEN-LAST:event_ordenarInsercionActionPerformed
 
@@ -497,7 +498,7 @@ public class Programa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No fue posible hacer el ordenamiento.");
         } else {
             JOptionPane.showMessageDialog(null, "Ordenamiento realizado.");
-            resetearPanel();
+            actualizarPanel();
         }
     }//GEN-LAST:event_ordenarSeleccionActionPerformed
 
@@ -506,7 +507,7 @@ public class Programa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No fue posible hacer el ordenamiento.");
         } else {
             JOptionPane.showMessageDialog(null, "Ordenamiento realizado.");
-            resetearPanel();
+            actualizarPanel();
         }
     }//GEN-LAST:event_ordenarSortActionPerformed
 
